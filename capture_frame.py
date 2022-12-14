@@ -7,6 +7,6 @@ class CaptureFrame():
         self.screen_region = screen_region
         # self.frame_queue = deque(maxlen=2);
         
-    def get_current_frame(self) -> deque:
+    def get_current_frame(self):
         # current_frame_data = grab_screen(self.screen_region)
         return grab_screen(self.screen_region)

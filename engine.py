@@ -7,6 +7,7 @@
 from capture_frame import CaptureFrame
 from game_input import Keys
 import time
+from navigation import calculate_navigation_error
 
 class Engine:
 
@@ -14,13 +15,13 @@ class Engine:
         self.screen_capture = CaptureFrame((0,0,1920,1080))
         self.input_controller = Keys()
         self.mouse_movement_steps = 100
+        self.navigation_error_list = []
 
     def _calculate_movement_steps(self, x:float,y:float) -> tuple:
         movement_time = 1 # in seconds
-        steps = 100
-        dt = movement_time/steps
-        dx = x/steps
-        dy = y/steps
+        dt = movement_time/self.mouse_movement_steps
+        dx = x/self.mouse_movement_steps
+        dy = y/self.mouse_movement_steps
         return dx,dy,dt
 
     def move_mouse(self, mouse_button=None, mouse_movement=None, duration:float = 0.5) -> None:
@@ -40,3 +41,13 @@ class Engine:
     
     def keyboard_release(self, keyboard_button:str) -> None:
         self.input_controller.directKey(keyboard_button, self.input_controller.key_release)
+
+
+    def get_navigation_error(self):
+        current_error = calculate_navigation_error(self.screen_capture.get_current_frame(),True)
+        self.navigation_error_list.append(current_error)
+        print(self.navigation_error_list)
+
+    def runner(self):
+        for i in range(0,200):
+            self.get_navigation_error()
