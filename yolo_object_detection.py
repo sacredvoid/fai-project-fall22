@@ -22,7 +22,7 @@ def image_format(image):
     return reshape
 
 def detect_objects(resized_image,yolo_net):
-    formatted_image = cv.dnn.blobFromImage(resized_image, 1/255.0, TRAGET_IMAGE_DIMENSIONS, swapRB = True, crop=True)
+    formatted_image = cv.dnn.blobFromImage(resized_image, 1/255.0, TRAGET_IMAGE_DIMENSIONS, swapRB = False, crop=True)
     yolo_net.setInput(formatted_image)
     return yolo_net.forward()
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     # yolo = create_yolo_model()
     
     # creating the capture object
-    capture = cv.VideoCapture("video\GTA-V_trimmed1.mp4")
+    capture = cv.VideoCapture("GTA-V_trimmed.mp4")
     capture.set(cv.CAP_PROP_FPS, 60)
     capture.set(cv.CAP_PROP_FRAME_WIDTH, 1920)
     capture.set(cv.CAP_PROP_FRAME_HEIGHT, 1080)
