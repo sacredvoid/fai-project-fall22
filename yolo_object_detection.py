@@ -5,7 +5,7 @@ TRAGET_IMAGE_DIMENSIONS = (640,640)
 COLORS = [(255, 255, 0), (0, 255, 0), (0, 255, 255), (255, 0, 0)]
 LABEL_NAMES = ['bicycle', 'bus', 'car', 'motorcycle', 'truck']
 def create_yolo_model():
-    yolo_net =cv.dnn.readNetFromONNX(r"yolo_model\best.onnx")
+    yolo_net =cv.dnn.readNetFromONNX(r"D:\FAI_CS5100\project\fai-project-fall22\yolo_model\best.onnx")
     return yolo_net
 
 YOLO = create_yolo_model()

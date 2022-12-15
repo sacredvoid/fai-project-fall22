@@ -80,21 +80,22 @@ class Engine:
             # current_move = self.error_list.pop(0)
             total_correction += current_nav_error
             if(not math.isnan(current_nav_error)):
-                if(current_nav_error > 0):
+                if(total_correction > 2):
                     self.keyboard_release("w")
                     self.keyboard_press("s")
                     self.keyboard_press("a")
-                    time.sleep(current_nav_error/100)
+                    print('total correction: ',total_correction)
+                    time.sleep(total_correction/100)
                     self.keyboard_release("a")
                     print("Key Pressed: A")
                     self.keyboard_release("s")
                     self.keyboard_press("w")
                 
-                else:
+                elif(total_correction < -2):
                     self.keyboard_release("w")
                     self.keyboard_press("s")
                     self.keyboard_press("d")
-                    time.sleep(-current_nav_error/100)
+                    time.sleep(-total_correction/100)
                     self.keyboard_release("d")
                     self.keyboard_release("s")
                     self.keyboard_press("w")
